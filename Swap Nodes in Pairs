@@ -1,0 +1,42 @@
+/* by swapping*/
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==NULL || head->next==NULL )
+        return head;
+         ListNode* ptr=head->next;
+         ListNode*temp=head;
+         swap(ptr->val,temp->val);
+          while(temp->next->next !=NULL && ptr->next->next !=NULL )
+          {
+       ptr=ptr->next->next;
+       temp=temp->next->next;
+         swap(ptr->val,temp->val);
+         }
+     
+       return head;
+    }
+};
+/* using recursion */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==NULL||head->next==NULL )
+        return head;
+        ListNode* ptr=head;
+        ptr=head->next;
+        head->next=swapPairs(head->next->next);
+        ptr->next=head;
+        return ptr;
+    }
+};
