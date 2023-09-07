@@ -1,0 +1,47 @@
+/* Recursive Approach */
+class Solution {
+public:
+    ListNode* reverse(ListNode* head){
+        if(head==NULL || head->next==NULL)
+        return head;
+
+        ListNode* newhead = reverse(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return newhead;
+    }
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        ListNode* cur=head;
+        ListNode* start=NULL;
+        ListNode* end=NULL;
+        ListNode* start_prev=NULL;
+        ListNode* end_next=NULL;
+        int i=1;
+        while(cur!=NULL &&  i<=right)
+        {
+            if(i<left)
+            {
+                start_prev=cur;
+            }
+            if(i==left)
+            start=cur;
+
+            if(i==right)
+            end=cur;
+            end_next=cur->next;
+
+            cur=cur->next;
+            i++;
+
+        }
+        end->next=NULL;
+          end=reverse(start);
+        if(start_prev==NULL)
+         head=end;
+         else
+         start_prev->next=end;
+         
+         start->next=end_next;
+         return head;
+    }
+};
